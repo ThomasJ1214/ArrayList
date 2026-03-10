@@ -11,15 +11,21 @@ const playerNameLabel = document.getElementById('playerNameLabel');
 const xpLabel = document.getElementById('xpLabel');
 
 const SAVE_KEY = 'arraylistAdventureSaveV3';
+const LEGACY_SAVE_KEYS = ['arraylistAdventureSaveV2'];
 const playerState = { name: 'Guest', xp: 0, tint: 'none', unlocked: 1, pos: { x: 80, y: 470 } };
 const nodes = [];
 
 function saveState() { localStorage.setItem(SAVE_KEY, JSON.stringify(playerState)); }
 function loadState() {
-  const raw = localStorage.getItem(SAVE_KEY);
-  if (!raw) return false;
-  Object.assign(playerState, JSON.parse(raw));
-  return true;
+  const candidates = [SAVE_KEY, ...LEGACY_SAVE_KEYS];
+  for (const key of candidates) {
+    const raw = localStorage.getItem(key);
+    if (!raw) continue;
+    Object.assign(playerState, JSON.parse(raw));
+    if (key !== SAVE_KEY) saveState();
+    return true;
+  }
+  return false;
 }
 
 function renderHUD() {

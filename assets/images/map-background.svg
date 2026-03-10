@@ -31,7 +31,7 @@
     <circle cx="640" cy="560" r="35"/><circle cx="920" cy="610" r="38"/><circle cx="1150" cy="500" r="30"/>
   </g>
 
-  <g fill="#0f172a" opacity=".25">
+  <g fill="#0f172a" opacity=".22">
     <rect width="1280" height="720"/>
   </g>
 </svg>

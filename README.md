@@ -43,3 +43,7 @@ ArrayList/
 2. Go to **Settings → Pages**.
 3. Use **Deploy from branch** and select root (`/`).
 4. Open the generated Pages URL.
+
+## Architecture note
+- World map and level gameplay are intentionally split (`game.html` -> `level.html`) to avoid keyboard/movement conflicts while solving level content.
+- Save data is shared through localStorage so progress survives page transitions.
