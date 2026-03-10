@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" shape-rendering="crispEdges">
+  <rect width="640" height="360" fill="#1d234f"/>
+  <rect y="260" width="640" height="100" fill="#315b2f"/>
+  <g fill="#78d7ff">
+    <polygon points="150,130 170,110 190,130 170,150"/>
+    <polygon points="300,170 320,150 340,170 320,190"/>
+    <polygon points="470,125 490,105 510,125 490,145"/>
+  </g>
+  <g fill="#0b2f6a" font-size="14" font-family="monospace">
+    <text x="160" y="134">&lt;&gt;</text><text x="310" y="174">[]</text><text x="480" y="129">add</text>
+  </g>
+</svg>

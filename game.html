@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArrayList Adventure | Game</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>ArrayList Adventure</h1>
+    <div id="hud">Player: <span id="playerNameLabel">Guest</span> | XP: <span id="xpLabel">0</span></div>
+  </header>
+
+  <section id="setupPanel" class="panel">
+    <h2>Create Your Character</h2>
+    <label>Username <input id="username" type="text" placeholder="Type your username" maxlength="20" /></label>
+    <label>Outfit tint
+      <select id="avatarColor">
+        <option value="none">Default</option>
+        <option value="hue-rotate(70deg)">Green</option>
+        <option value="hue-rotate(150deg)">Blue</option>
+        <option value="hue-rotate(280deg)">Purple</option>
+      </select>
+    </label>
+    <button id="beginGame" class="button">Enter the Map</button>
+    <button id="loadSave" class="button alt">Load Save</button>
+  </section>
+
+  <section id="mapSection" class="hidden">
+    <div class="controls">Use <strong>WASD</strong> to move. Meet teachers and clear level nodes.</div>
+    <div id="map" tabindex="0" aria-label="Game map">
+      <div id="trail"></div>
+      <div class="npc" id="npc1" data-text="Welcome coder! Start at Level 1 and build typed ArrayLists."><img src="assets/characters/teacher-java.svg" alt="Java Teacher" /></div>
+      <div class="npc" id="npc2" data-text="Boss towers ahead! Use remove(), size(), and loops to win."><img src="assets/characters/teacher-boss.svg" alt="Boss Teacher" /></div>
+      <div id="player"></div>
+    </div>
+    <button id="saveGame" class="button">Save Game</button>
+  </section>
+
+  <dialog id="npcDialog"><p id="npcText"></p><button class="button" id="closeNpc">Close</button></dialog>
+
+  <dialog id="levelDialog">
+    <article>
+      <h2 id="levelTitle"></h2>
+      <p id="learnText"></p>
+
+      <section>
+        <h3>Try it yourself</h3>
+        <textarea id="codeBox" rows="6"></textarea>
+        <button id="runCode" class="button">Check Code</button>
+        <p id="codeFeedback"></p>
+      </section>
+
+      <section>
+        <h3>Drag-drop coding puzzle</h3>
+        <p>Drag tokens into slots in the correct order:</p>
+        <div id="puzzleBank" class="token-row"></div>
+        <div id="puzzleSlots" class="slot-row"></div>
+        <button id="checkPuzzle" class="button alt">Check Puzzle</button>
+        <p id="puzzleFeedback"></p>
+      </section>
+
+      <section>
+        <h3>Mini game</h3>
+        <p id="miniGamePrompt"></p>
+        <div id="miniGameOptions"></div>
+        <p id="miniGameFeedback"></p>
+      </section>
+
+      <section>
+        <h3>Quiz</h3>
+        <p id="quizQuestion"></p>
+        <div id="quizOptions"></div>
+        <p id="quizFeedback"></p>
+      </section>
+
+      <section id="bossBattle" class="hidden">
+        <h3>Boss Battle</h3>
+        <p><strong id="bossName"></strong> HP: <span id="bossHp"></span></p>
+        <p id="bossPrompt"></p>
+        <div id="bossOptions"></div>
+        <p id="bossFeedback"></p>
+      </section>
+
+      <button id="closeLevel" class="button">Close Level</button>
+    </article>
+  </dialog>
+
+  <script src="data/levels.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
