@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArrayList Adventure | World Map</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>ArrayList Adventure</h1>
+    <div id="hud">Player: <span id="playerNameLabel">Guest</span> · XP: <span id="xpLabel">0</span></div>
+  </header>
+
+  <section id="setupPanel" class="panel container">
+    <h2>Create Your Character</h2>
+    <label>Username <input id="username" type="text" placeholder="Type your username" maxlength="20" /></label>
+    <label>Outfit tint
+      <select id="avatarColor">
+        <option value="none">Classic</option>
+        <option value="hue-rotate(70deg)">Forest</option>
+        <option value="hue-rotate(150deg)">Ocean</option>
+        <option value="hue-rotate(280deg)">Royal</option>
+      </select>
+    </label>
+    <div class="button-row">
+      <button id="beginGame" class="button">Enter the Map</button>
+      <button id="loadSave" class="button alt">Load Save</button>
+    </div>
+  </section>
+
+  <section id="mapSection" class="hidden container">
+    <div class="controls">Move with <strong>W A S D</strong>. Reach level nodes to open a dedicated level screen.</div>
+    <div id="map" tabindex="0" aria-label="Game map">
+      <div id="trail"></div>
+      <button class="npc" id="npc1" data-text="Welcome! Learn typed lists, then defeat the ArrayList bosses."><img src="assets/characters/teacher-java.svg" alt="Java Teacher" /></button>
+      <button class="npc" id="npc2" data-text="Pro tip: clear code + puzzle + quiz to maximize XP."><img src="assets/characters/teacher-boss.svg" alt="Boss Teacher" /></button>
+      <div id="player"></div>
+    </div>
+    <div class="map-footer">
+      <p id="npcText" class="info-text">Talk to teachers for guidance.</p>
+      <button id="saveGame" class="button">Save Game</button>
+    </div>
+  </section>
+
+  <script src="data/levels.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

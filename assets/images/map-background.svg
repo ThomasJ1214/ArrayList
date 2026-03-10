@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" shape-rendering="crispEdges">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset="1" stop-color="#1e293b"/></linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f855a"/><stop offset="1" stop-color="#1f6b45"/></linearGradient>
+  </defs>
+  <rect width="1280" height="360" fill="url(#sky)"/>
+  <rect y="360" width="1280" height="360" fill="url(#ground)"/>
+
+  <g fill="#64748b">
+    <polygon points="0,380 130,170 260,380"/>
+    <polygon points="180,380 340,130 500,380"/>
+    <polygon points="420,380 560,190 700,380"/>
+    <polygon points="620,380 800,150 980,380"/>
+  </g>
+  <g fill="#e2e8f0" opacity=".8">
+    <polygon points="120,210 130,170 140,210"/>
+    <polygon points="325,160 340,130 355,160"/>
+    <polygon points="790,190 800,150 810,190"/>
+  </g>
+
+  <g fill="#60a5fa" opacity=".85">
+    <ellipse cx="1020" cy="250" rx="220" ry="130"/>
+  </g>
+
+  <g fill="#8b5e3c">
+    <path d="M90 625 L230 560 L390 500 L540 430 L680 390 L820 330 L980 255 L1140 175" stroke="#8b5e3c" stroke-width="52" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g fill="#1f7a3f">
+    <circle cx="150" cy="520" r="35"/><circle cx="280" cy="640" r="30"/><circle cx="430" cy="590" r="32"/>
+    <circle cx="640" cy="560" r="35"/><circle cx="920" cy="610" r="38"/><circle cx="1150" cy="500" r="30"/>
+  </g>
+
+  <g fill="#0f172a" opacity=".25">
+    <rect width="1280" height="720"/>
+  </g>
+</svg>
