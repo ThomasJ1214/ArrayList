@@ -10,18 +10,28 @@ const npcText = document.getElementById('npcText');
 const playerNameLabel = document.getElementById('playerNameLabel');
 const xpLabel = document.getElementById('xpLabel');
 
-const SAVE_KEY = 'arraylistAdventureSaveV3';
-const LEGACY_SAVE_KEYS = ['arraylistAdventureSaveV2'];
-const playerState = { name: 'Guest', xp: 0, tint: 'none', unlocked: 1, pos: { x: 80, y: 470 } };
+const SAVE_KEY = 'arraylistAdventureSaveV4';
+const LEGACY_SAVE_KEYS = ['arraylistAdventureSaveV3', 'arraylistAdventureSaveV2'];
+const playerState = {
+  name: 'Guest',
+  xp: 0,
+  tint: 'none',
+  unlocked: 1,
+  pos: { x: 80, y: 470 },
+  completed: {}
+};
 const nodes = [];
 
-function saveState() { localStorage.setItem(SAVE_KEY, JSON.stringify(playerState)); }
+function saveState() {
+  localStorage.setItem(SAVE_KEY, JSON.stringify(playerState));
+}
+
 function loadState() {
-  const candidates = [SAVE_KEY, ...LEGACY_SAVE_KEYS];
-  for (const key of candidates) {
+  for (const key of [SAVE_KEY, ...LEGACY_SAVE_KEYS]) {
     const raw = localStorage.getItem(key);
     if (!raw) continue;
     Object.assign(playerState, JSON.parse(raw));
+    if (!playerState.completed) playerState.completed = {};
     if (key !== SAVE_KEY) saveState();
     return true;
   }
@@ -44,24 +54,23 @@ function renderPlayer() {
   player.style.top = `${playerState.pos.y}px`;
 }
 
-function goToLevel(index) {
-  saveState();
-  window.location.href = `level.html?level=${index}`;
-}
-
 function buildTrail() {
   const points = [
-    { x: 80, y: 470 }, { x: 200, y: 420 }, { x: 320, y: 360 }, { x: 430, y: 300 }, { x: 540, y: 290 },
-    { x: 660, y: 240 }, { x: 760, y: 180 }, { x: 860, y: 120 }
+    { x: 80, y: 470 }, { x: 190, y: 430 }, { x: 300, y: 390 }, { x: 420, y: 340 },
+    { x: 540, y: 300 }, { x: 660, y: 250 }, { x: 780, y: 200 }, { x: 900, y: 150 }
   ];
-  LEVELS.forEach((_, i) => {
-    nodes.push({ ...points[i], unlocked: i < playerState.unlocked });
+
+  LEVELS.forEach((level, i) => {
+    const point = points[i] || points[points.length - 1];
+    nodes.push({ ...point, unlocked: i < playerState.unlocked });
+
     const node = document.createElement('button');
     node.className = 'node';
-    node.style.left = `${points[i].x}px`;
-    node.style.top = `${points[i].y}px`;
-    node.textContent = i + 1;
+    node.style.left = `${point.x}px`;
+    node.style.top = `${point.y}px`;
+    node.textContent = String(level.id);
     node.disabled = i >= playerState.unlocked;
+    node.title = level.title;
     node.addEventListener('click', () => goToLevel(i));
     trail.appendChild(node);
   });
@@ -69,6 +78,11 @@ function buildTrail() {
 
 function nearUnlockedNode() {
   return nodes.findIndex((n) => Math.hypot(n.x - playerState.pos.x, n.y - playerState.pos.y) < 30 && n.unlocked);
+}
+
+function goToLevel(index) {
+  saveState();
+  window.location.href = `level.html?level=${index}`;
 }
 
 function startAdventure(fromSave = false) {
@@ -85,18 +99,30 @@ function startAdventure(fromSave = false) {
 }
 
 beginGameBtn.addEventListener('click', () => startAdventure(false));
-loadSaveBtn.addEventListener('click', () => { if (loadState()) startAdventure(true); });
-saveGameBtn.addEventListener('click', () => { saveState(); saveGameBtn.textContent = 'Saved'; setTimeout(() => saveGameBtn.textContent = 'Save Game', 1000); });
+loadSaveBtn.addEventListener('click', () => {
+  const ok = loadState();
+  if (ok) startAdventure(true);
+  else npcText.textContent = 'No save found yet. Start a new journey.';
+});
+saveGameBtn.addEventListener('click', () => {
+  saveState();
+  saveGameBtn.textContent = 'Saved';
+  setTimeout(() => { saveGameBtn.textContent = 'Save'; }, 900);
+});
 
 document.querySelectorAll('.npc').forEach((npc) => {
-  npc.addEventListener('click', () => { npcText.textContent = npc.dataset.text; });
+  npc.addEventListener('click', () => {
+    npcText.textContent = npc.dataset.text;
+  });
 });
 
 window.addEventListener('keydown', (event) => {
   if (mapSection.classList.contains('hidden')) return;
+
   const key = event.key.toLowerCase();
   const step = 14;
   let moved = false;
+
   if (key === 'w') { playerState.pos.y -= step; setDirection('up'); moved = true; }
   if (key === 's') { playerState.pos.y += step; setDirection('down'); moved = true; }
   if (key === 'a') { playerState.pos.x -= step; setDirection('left'); moved = true; }
@@ -107,7 +133,7 @@ window.addEventListener('keydown', (event) => {
   clearTimeout(window.walkTimer);
   window.walkTimer = setTimeout(() => player.classList.remove('walk'), 220);
 
-  playerState.pos.x = Math.max(20, Math.min(920, playerState.pos.x));
+  playerState.pos.x = Math.max(20, Math.min(930, playerState.pos.x));
   playerState.pos.y = Math.max(40, Math.min(520, playerState.pos.y));
   renderPlayer();
 

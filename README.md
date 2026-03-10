@@ -1,19 +1,19 @@
-# Java ArrayList Learning RPG (GitHub Pages Ready)
+# ArrayList Academy (GitHub Pages Ready)
 
-A minimalist, professional-looking retro RPG website that teaches Java `ArrayList` using map exploration and dedicated level pages.
+This is the refreshed version of the Java ArrayList learning game. Old placeholder content has been replaced with cleaner structure, updated level curriculum, and improved progression logic.
 
-## Directory format
+## Project structure
 
 ```text
 ArrayList/
 ├── index.html
-├── game.html                  # World map / exploration screen
-├── level.html                 # Dedicated full-screen level experience
+├── game.html
+├── level.html
 ├── css/
 │   └── style.css
 ├── js/
-│   ├── main.js                # Map movement + world interactions
-│   └── level.js               # Level content logic and progression
+│   ├── main.js
+│   └── level.js
 ├── data/
 │   └── levels.js
 ├── assets/
@@ -29,21 +29,20 @@ ArrayList/
 └── README.md
 ```
 
-## Included gameplay systems
-- Start menu and character setup
-- Pixel world map with WASD movement
-- Dedicated level webpage (prevents map movement conflicts)
-- Drag-drop coding puzzles
-- Mini-games, quizzes, and boss battles
-- XP progression and save/load via localStorage
-- NPC teacher guidance
+## What was replaced
+- Updated branding/copy from old “adventure draft” text to **ArrayList Academy** language.
+- Replaced old 5-level progression with a fuller 8-level curriculum (fundamentals -> final boss).
+- Replaced repeatable XP exploits with per-level completion tracking (`code`, `puzzle`, `mini`, `quiz`, `boss`).
+- Replaced old save handling with `V4` plus automatic migration from legacy keys.
+- Replaced old UI wording and controls text for clearer flow.
 
-## Deploy on GitHub Pages
-1. Push this repository to GitHub.
-2. Go to **Settings → Pages**.
-3. Use **Deploy from branch** and select root (`/`).
-4. Open the generated Pages URL.
+## Key gameplay behavior
+- Map page (`game.html`) handles movement and level entry only.
+- Level page (`level.html`) handles learning content and challenges.
+- Entering a level fully changes page, so map input conflicts are eliminated.
 
-## Architecture note
-- World map and level gameplay are intentionally split (`game.html` -> `level.html`) to avoid keyboard/movement conflicts while solving level content.
-- Save data is shared through localStorage so progress survives page transitions.
+## Deploy
+1. Push repository to GitHub.
+2. Open **Settings → Pages**.
+3. Select **Deploy from branch** and choose root (`/`).
+4. Open your generated GitHub Pages URL.
